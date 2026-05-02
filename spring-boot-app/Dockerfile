@@ -1,13 +1,23 @@
 # You can change this base image to anything else
 # But make sure to use the correct version of Java
-FROM openjdk:11-jre-slim
+#FROM openjdk:11-jre-slim
 
 # Simply the artifact path
-ARG artifact=target/spring-boot-web.jar
+#ARG artifact=target/spring-boot-web.jar
+
+#WORKDIR /opt/app
+
+#COPY ${artifact} app.jar
+
+# This should not be changed
+#ENTRYPOINT ["java","-jar","app.jar"]
+
+FROM eclipse-temurin:17-jre
 
 WORKDIR /opt/app
 
-COPY ${artifact} app.jar
+COPY target/*.jar app.jar
 
-# This should not be changed
+EXPOSE 8080
+
 ENTRYPOINT ["java","-jar","app.jar"]
